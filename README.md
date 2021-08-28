@@ -8,8 +8,8 @@ A simple python3 script for downloading reddit content from multiple subreddits.
 3. requests (reddit posts can have external urls, to manage those)
 
 *Requisities*
-Install all the mentioned packages.
-Get reddit client key and secret from Reddit Developer. [ref](https://www.reddit.com/prefs/apps/)
-For user agent, check *praw* documentation [prow/docs](https://praw.readthedocs.io/en/stable/getting_started/authentication.html)
+1. Install all the mentioned packages.
+2. Get reddit client key and secret from Reddit Developer. [ref](https://www.reddit.com/prefs/apps/)
+3. For user agent, check *praw* documentation [prow/docs](https://praw.readthedocs.io/en/stable/getting_started/authentication.html)
 
 *This is just a simple project and quite rudimentary(the unneccessary logs), Spare this noob*
