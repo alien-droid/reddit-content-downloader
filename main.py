@@ -1,3 +1,5 @@
+# pip install praw youtube_dl requests
+
 import os
 import sys
 
