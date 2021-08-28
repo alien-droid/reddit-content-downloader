@@ -6,7 +6,7 @@ A simple python3 script for downloading reddit content from multiple subreddits.
 1. Praw, Prawcode (great reddit client, simple and easy to use)
 2. Youtube_dl (downloader for content in reddit posts)
 3. requests (reddit posts can have external urls, to manage those)
-# the pip command available in *main.py*
+**the pip command available in *main.py***
 
 *Requisities*
 1. Install all the mentioned packages.
