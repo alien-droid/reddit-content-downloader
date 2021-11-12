@@ -2,6 +2,7 @@
 
 import os
 import sys
+import argparse
 
 import praw
 import prawcore
@@ -15,12 +16,7 @@ config = json.load(open('./config/config.json', 'r'))
 reddit = praw.Reddit(client_id=config['clientId'],
                      client_secret=config['clientSecret'],
                      user_agent=config['userAgent'])
-# depends on your need, modify 
-time = 'day' # can be day, week, all, month, year 
-limit = 100
-subreddits = {'memes', 'FoodPorn', 'GetMotivated', 'QuotesPorn'}
 max_title_len = 150
-
 
 # optional
 class MyLogger(object):
@@ -46,12 +42,16 @@ def shorten_title(title):
     return title
 
 
-def download_content():
+def download_content(time, limit, subreddits):
     create_download_folder()
+    time = time
+    limit = limit
+    subreddits = subreddits
     for s in subreddits:
         sub = reddit.subreddit(s)
         try:
-            for submission in sub.top(time, limit=limit): # you can get hot, best as well
+            # you can get hot, best as well
+            for submission in sub.top(time, limit=limit):
                 title = submission.title
                 title = shorten_title(title)
                 ydl_opts = {
@@ -92,6 +92,20 @@ def download_content():
             print(sys.exc_info()[0])
 
 
+def getArguments():
+    argParser = argparse.ArgumentParser()
+    argParser.add_argument("-s",  "--sub", nargs='+',
+                           help="The Name of subreddits needed to download separated by spaces", type=str, required=True)
+    argParser.add_argument(
+        "-l", "--limit", help="Entering the limit of the top comments like enter '25' for top 25 comments", type=int, required=True)
+    argParser.add_argument(
+        "-t", "--time", help="Entering the time of the top comments like 'all, week, day, time, month'", type=str, required=True)
+    args = vars(argParser.parse_args())
+
+    return {"time": args['time'], "subReddit": args['sub'], "limit": args['limit']}
+
+
 if __name__ == '__main__':
-    download_content()
+    args = getArguments()
+    download_content(args['time'], args['limit'], args['subReddit'])
     print('Done')
